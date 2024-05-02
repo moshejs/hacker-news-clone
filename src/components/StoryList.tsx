@@ -1,7 +1,6 @@
 'use client';
-import Link from 'next/link'
 import { useState } from 'react';
-import { useSavedStories } from './contexts/SavedStoriesContext';
+import { useSavedStories } from '../contexts/SavedStoriesContext';
 import StoryItem from './StoryItem';
 
 interface Story {
@@ -37,7 +36,7 @@ export default function StoryList({ stories }: StoryListProps) {
         >
           latest
         </a>
-        <span className='text-gray-700'> | </span>
+        <span className={'text-gray-700'}> | </span>
         <a
           className={`${view === 'starred' ? 'hover:text-indigo-700' : 'text-gray-700 hover:text-gray-800'} font-opensans`}
           style={{ color: view === 'starred' ? '#FE7139' : undefined }}

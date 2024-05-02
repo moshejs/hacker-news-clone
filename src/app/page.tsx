@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react';
-import StoryList from '../StoryList';
+import StoryList from '../components/StoryList';
 
 interface Story {
   id: string;
@@ -66,6 +66,5 @@ export default function Home() {
         </div>
       </div>
     </main>
-
   );
 }

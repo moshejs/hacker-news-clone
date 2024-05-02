@@ -19,7 +19,7 @@ const config: Config = {
       },
       fontFamily: {
         ubuntu: ['Ubuntu Mono', 'monospace'], // Ensure Ubuntu Mono is loaded in your index.html or via import in your CSS
-        opensans: ['Open Sans', 'sans-serif'],
+        opensans: ['Open Sans', 'sans-serif']
       }
     },
   },

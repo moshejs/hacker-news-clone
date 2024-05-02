@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import { useSavedStories } from './contexts/SavedStoriesContext';
+import { useSavedStories } from '../contexts/SavedStoriesContext';
 
 interface Story {
   id: string;
