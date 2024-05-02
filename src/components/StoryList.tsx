@@ -57,6 +57,5 @@ export default function StoryList({ stories }: StoryListProps) {
         ))}
       </ul>
     </>
-
   );
 }
