@@ -45,14 +45,14 @@ const StoryItem: React.FC<StoryItemProps> = ({ story, index }) => {
 
   return (
     <li className="border-t border-gray-300 pt-2">
-      <span className="text-lg font-normal leading-5 font-mono text-black-half">{index + 1}.</span>{' '}
-      <a href={story.url} className="font-bold leading-5 font-opensans text-lg text-black">{story.title}</a>
-      <a href={story.url} className="text-xs leading-tight font-sans text-gray-500">
+      <span className="text-lg font-normal leading-5 font-opensans text-black-half">{index + 1}.</span>{' '}
+      <a href={story.url} className="font-bold leading-6 font-ubuntu text-lg text-black">{story.title}</a>
+      <a href={story.url} className="text-xs leading-tight font-opensans text-gray-500">
         {` (${extractDomain(story.url)})`}
       </a>
       <div className="text-xs leading-tight font-opensans text-black-half pt-1.5">
         {story.score} points by {story.by}{' '}
-        {formatDistanceToNow(new Date(story.time * 1000), { addSuffix: true })} |{' '}
+        {formatDistanceToNow(new Date(story.time * 1000), { addSuffix: true }).split('about ')[1]} | {' '}
         {story.descendants} comments |{' '}
         <button
           onClick={handleSaveStory}
