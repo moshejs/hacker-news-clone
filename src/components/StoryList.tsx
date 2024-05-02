@@ -36,7 +36,9 @@ export default function StoryList({ stories }: StoryListProps) {
 
   return (
     <>
-      <div className="flex space-x-2">
+      <div className="flex items-center space-x-4">
+       <h1 className="font-bold text-2xl mb-0 font-mono text-black">Hacker News</h1>
+
         <a
           className={`${
             view === 'latest' ? 'hover:text-indigo-700' : 'text-gray-700 hover:text-gray-800'
@@ -46,7 +48,7 @@ export default function StoryList({ stories }: StoryListProps) {
         >
           latest
         </a>
-        <span className={'text-gray-700'}> | </span>
+        <span className={'text-gray-700'}>|</span>
         <a
           className={`${
             view === 'starred' ? 'hover:text-indigo-700' : 'text-gray-700 hover:text-gray-800'
