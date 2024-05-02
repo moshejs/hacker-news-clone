@@ -17,6 +17,7 @@ interface StoryItemProps {
   story: Story;
   index: number;
   onSave: (story: Story) => void;
+  isSaved: boolean;
 }
 
 function extractDomain(url: string): string | null {
