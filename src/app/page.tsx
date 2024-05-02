@@ -1,8 +1,20 @@
-import StoryList from './StoryList';
+'use client'
+import { useEffect, useState } from 'react';
+import StoryList from '../StoryList';
 
-async function getTopStories() {
+interface Story {
+  id: string;
+  url: string;
+  title: string;
+  score: number;
+  by: string;
+  time: number;
+  descendants: number;
+}
+
+async function getTopStories(): Promise<number[]> {
   const res = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json', {
-    next: { revalidate: 60 } // Revalidate every 60 seconds
+    method: 'GET'
   });
 
   if (!res.ok) {
@@ -12,9 +24,9 @@ async function getTopStories() {
   return res.json();
 }
 
-async function getStoryDetails(storyId) {
+async function getStoryDetails(storyId: number): Promise<Story> {
   const res = await fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`, {
-    next: { revalidate: 60 } // Revalidate every 60 seconds
+    method: 'GET'
   });
 
   if (!res.ok) {
@@ -24,13 +36,24 @@ async function getStoryDetails(storyId) {
   return res.json();
 }
 
+export default function Home() {
+  const [topStories, setTopStories] = useState<Story[]>([]);
 
+  useEffect(() => {
+    async function fetchStories() {
+      try {
+        const topStoryIds = await getTopStories();
+        const stories = await Promise.all(
+          topStoryIds.slice(0, 10).map((storyId) => getStoryDetails(storyId))
+        );
+        setTopStories(stories);
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
-export default async function Home() {
-  const topStoryIds = await getTopStories();
-  const topStories = await Promise.all(
-    topStoryIds.slice(0, 10).map((storyId) => getStoryDetails(storyId))
-  );
+    fetchStories();
+  }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -43,6 +66,6 @@ export default async function Home() {
         </div>
       </div>
     </main>
+
   );
 }
-
