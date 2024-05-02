@@ -41,7 +41,7 @@ export default function Home() {
       try {
         const topStoryIds = await getTopStories();
         const stories = await Promise.all(
-          topStoryIds.slice(0, 20).map((storyId) => getStoryDetails(storyId))
+          topStoryIds.map((storyId) => getStoryDetails(storyId))
         );
         setTopStories(stories);
       } catch (error) {
