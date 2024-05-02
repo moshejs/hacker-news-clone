@@ -1,7 +1,6 @@
 'use client';
-
-import { useState } from 'react';
 import { useSavedStories } from '../contexts/SavedStoriesContext';
+import {useState} from 'react';
 import StoryItem from './StoryItem';
 
 interface Story {
@@ -16,30 +15,20 @@ interface Story {
 
 interface StoryListProps {
   stories: Story[];
+  onShowMore: () => void;
 }
 
 type ViewType = 'latest' | 'starred';
 
-export default function StoryList({ stories }: StoryListProps) {
+export default function StoryList({ stories, onShowMore }: StoryListProps) {
   const [view, setView] = useState<ViewType>('latest');
-  const [displayedStoryCount, setDisplayedStoryCount] = useState(10);
   const { savedStories, saveStory } = useSavedStories();
-
-  const displayedStories =
-    view === 'latest'
-      ? stories.slice(0, displayedStoryCount)
-      : savedStories;
-
-  const handleShowMore = () => {
-    setDisplayedStoryCount((prevCount) => prevCount + 10);
-  };
+  const displayedStories = view === 'latest' ? stories : savedStories;
 
   return (
     <>
       <div className="flex items-center space-x-4">
-            <h1 className="font-bold text-2xl mb-0 font-mono text-black">Hacker News</h1>
-      </div>
-      <div className="flex space-x-2">
+        <h1 className="font-bold text-2xl mb-0 font-mono text-black">Hacker News</h1>
         <a
           className={`${
             view === 'latest' ? 'hover:text-indigo-700' : 'text-gray-700 hover:text-gray-800'
@@ -72,10 +61,7 @@ export default function StoryList({ stories }: StoryListProps) {
         ))}
       </ul>
       {view === 'latest' && (
-        <button
-          className="bg-orange-500 text-white px-4 py-2 rounded"
-          onClick={handleShowMore}
-        >
+        <button className="bg-orange-500 text-white px-4 py-2 rounded" onClick={onShowMore}>
           Show More
         </button>
       )}
