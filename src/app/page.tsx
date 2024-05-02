@@ -56,15 +56,13 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="container mx-auto px-4">
+    <main>
         <div className="bg-gray-100 p-4 border-t-4 border-orange-500" style={{ borderColor: '#FE7139' }}>
           <div className="flex items-center space-x-4">
             <h1 className="font-bold text-2xl mb-0 font-mono text-black">Hacker News</h1>
           </div>
           <StoryList stories={topStories} />
         </div>
-      </div>
     </main>
   );
 }
