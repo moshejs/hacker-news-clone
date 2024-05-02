@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import { useSavedStories } from '../contexts/SavedStoriesContext';
 import StoryItem from './StoryItem';
@@ -21,16 +22,25 @@ type ViewType = 'latest' | 'starred';
 
 export default function StoryList({ stories }: StoryListProps) {
   const [view, setView] = useState<ViewType>('latest');
+  const [displayedStoryCount, setDisplayedStoryCount] = useState(10);
   const { savedStories, saveStory } = useSavedStories();
 
+  const displayedStories =
+    view === 'latest'
+      ? stories.slice(0, displayedStoryCount)
+      : savedStories;
 
-  const displayedStories = view === 'latest' ? stories : savedStories;
+  const handleShowMore = () => {
+    setDisplayedStoryCount((prevCount) => prevCount + 10);
+  };
 
   return (
     <>
       <div className="flex space-x-2">
         <a
-          className={`${view === 'latest' ? 'hover:text-indigo-700' : 'text-gray-700 hover:text-gray-800'} font-opensans`}
+          className={`${
+            view === 'latest' ? 'hover:text-indigo-700' : 'text-gray-700 hover:text-gray-800'
+          } font-opensans`}
           style={{ color: view === 'latest' ? '#FE7139' : undefined }}
           onClick={() => setView('latest')}
         >
@@ -38,11 +48,13 @@ export default function StoryList({ stories }: StoryListProps) {
         </a>
         <span className={'text-gray-700'}> | </span>
         <a
-          className={`${view === 'starred' ? 'hover:text-indigo-700' : 'text-gray-700 hover:text-gray-800'} font-opensans`}
+          className={`${
+            view === 'starred' ? 'hover:text-indigo-700' : 'text-gray-700 hover:text-gray-800'
+          } font-opensans`}
           style={{ color: view === 'starred' ? '#FE7139' : undefined }}
           onClick={() => setView('starred')}
         >
-        starred
+          starred
         </a>
       </div>
       <ul className="space-y-2">
@@ -56,6 +68,14 @@ export default function StoryList({ stories }: StoryListProps) {
           />
         ))}
       </ul>
+      {view === 'latest' && displayedStoryCount < stories.length && (
+        <button
+          className="bg-orange-500 text-white px-4 py-2 rounded"
+          onClick={handleShowMore}
+        >
+          Show More
+        </button>
+      )}
     </>
   );
 }

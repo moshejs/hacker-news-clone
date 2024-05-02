@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { useEffect, useState } from 'react';
 import StoryList from '../components/StoryList';
 
@@ -14,25 +15,21 @@ interface Story {
 
 async function getTopStories(): Promise<number[]> {
   const res = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json', {
-    method: 'GET'
+    method: 'GET',
   });
-
   if (!res.ok) {
     throw new Error('Failed to fetch top stories');
   }
-
   return res.json();
 }
 
 async function getStoryDetails(storyId: number): Promise<Story> {
   const res = await fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`, {
-    method: 'GET'
+    method: 'GET',
   });
-
   if (!res.ok) {
     throw new Error(`Failed to fetch story details for story ID: ${storyId}`);
   }
-
   return res.json();
 }
 
@@ -44,14 +41,13 @@ export default function Home() {
       try {
         const topStoryIds = await getTopStories();
         const stories = await Promise.all(
-          topStoryIds.slice(0, 10).map((storyId) => getStoryDetails(storyId))
+          topStoryIds.slice(0, 20).map((storyId) => getStoryDetails(storyId))
         );
         setTopStories(stories);
       } catch (error) {
         console.error(error);
       }
     }
-
     fetchStories();
   }, []);
 
