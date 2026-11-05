@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SavedStoriesProvider } from "@/contexts/SavedStoriesContext";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from "@/components/google-analytics";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       
-      <SavedStoriesProvider><body className={inter.className}>{children}<footer className="bg-gray-100 px-4 pb-6 pt-2 text-center text-xs text-gray-500">Built by <a href="https://www.quentin.software/" className="text-gray-700 underline hover:text-orange-500">Quentin.Code</a></footer><Analytics /></body></SavedStoriesProvider>
+      <SavedStoriesProvider><body className={inter.className}>{children}<footer className="bg-gray-100 px-4 pb-6 pt-2 text-center text-xs text-gray-500">Built by <a href="https://www.quentin.software/" className="text-gray-700 underline hover:text-orange-500">Quentin.Code</a></footer><Analytics /><GoogleAnalytics /></body></SavedStoriesProvider>
 
     </html>
   );
