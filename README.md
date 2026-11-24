@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hacker News clone (practice project)
 
-## Getting Started
+A practice clone built while learning Next.js. It is **not affiliated with Hacker News or Y Combinator**.
 
-First, run the development server:
+## Status: hosted demo retired
+
+The hosted demo was retired on 2026-11-24. The deployment now answers every path with a short
+"demo retired" page, HTTP 410 Gone, and `noindex, nofollow` (both a `<meta name="robots">` tag and an
+`X-Robots-Tag` header), via `src/middleware.ts` and `vercel.json`.
+
+## Where the code is
+
+The original practice app (Next.js 14 App Router, Tailwind, the public Hacker News Firebase API) is kept,
+unbuilt, in [`archive/`](./archive):
+
+- `archive/src/app/page.tsx` — top stories page
+- `archive/src/components/` — `StoryList`, `StoryItem`
+- `archive/src/contexts/SavedStoriesContext.tsx` — saved stories in local storage
+- `archive/tailwind.config.ts`, `archive/postcss.config.mjs`, `archive/public/`
+
+To run it locally again, move `archive/src`, `archive/public` and the two config files back to the repo
+root (replacing the retired-page `src/`), then `npm ci && npm run dev`.
+
+## Checks
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm ci
+npx tsc --noEmit
+npm run lint
+npm run build
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
